@@ -1,8 +1,7 @@
 package CreditApp;
 
 import CreditApp.models.InputData;
-import CreditApp.service.PrintingService;
-import CreditApp.service.PrintingServiceImpl;
+import CreditApp.service.*;
 
 public class Main {
 
@@ -10,7 +9,15 @@ public class Main {
         InputData inputData = new InputData();
 
         PrintingService printingService = new PrintingServiceImpl();
-        printingService.printInputDataInfo(inputData);
+        RateCalculationService rateCalculationService = new RateCalculationServiceImpl();
+
+
+        MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(
+                printingService,
+                rateCalculationService
+        );
+
+        mortgageCalculationService.calculate(inputData);
     }
 
 }
