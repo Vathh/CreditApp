@@ -15,7 +15,6 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService 
         return switch (inputData.getRateType()) {
             case CONSTANT -> calculateConstantRate(inputData);
             case DECREASING -> calculateDecreasingRate(inputData);
-            default -> throw new RuntimeException("Case not handled");
         };
     }
 
@@ -24,7 +23,6 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService 
         return switch (inputData.getRateType()) {
             case CONSTANT -> calculateConstantRate(inputData, previousRate);
             case DECREASING -> calculateDecreasingRate(inputData, previousRate);
-            default -> throw new RuntimeException("Case not handled");
         };
     }
 
@@ -70,7 +68,7 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService 
         BigDecimal residualAmount = previousRate.getMortgageResidual().getAmount();
 
         BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-        BigDecimal capitalAmount = calculateDecreasingCapitalAmount(residualAmount, inputData.getMonthsDuration());
+        BigDecimal capitalAmount = calculateDecreasingCapitalAmount(inputData.getAmount(), inputData.getMonthsDuration());
         BigDecimal rateAmount = capitalAmount.add(interestAmount);
 
         return new RateAmounts(rateAmount, interestAmount, capitalAmount);
