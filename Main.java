@@ -19,7 +19,8 @@ public class Main {
 
         MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(
                 printingService,
-                rateCalculationService
+                rateCalculationService,
+                SummaryServiceFactory.create()
         );
 
         mortgageCalculationService.calculate(inputData);

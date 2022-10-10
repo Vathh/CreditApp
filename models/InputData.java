@@ -52,7 +52,7 @@ public class InputData {
         return rateType;
     }
     public BigDecimal getInterestPercent() {
-        return wiborPercent.add(bankMarginPercent).divide(PERCENT, 10, RoundingMode.HALF_UP);
+        return wiborPercent.add(bankMarginPercent).divide(PERCENT, 4, RoundingMode.HALF_UP);
     }
     public BigDecimal getInterestDisplay() {
         return wiborPercent.add(bankMarginPercent).setScale(2, RoundingMode.HALF_UP);

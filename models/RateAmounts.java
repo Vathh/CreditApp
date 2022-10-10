@@ -1,6 +1,7 @@
 package CreditApp.models;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class RateAmounts {
 
@@ -17,14 +18,14 @@ public class RateAmounts {
     }
 
     public BigDecimal getRateAmount() {
-        return rateAmount;
+        return rateAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getInterestAmount() {
-        return interestAmount;
+        return interestAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getCapitalAmount() {
-        return capitalAmount;
+        return capitalAmount.setScale(2, RoundingMode.HALF_UP);
     }
 }
