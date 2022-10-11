@@ -3,6 +3,7 @@ package CreditApp.models;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Map;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class InputData {
@@ -14,6 +15,44 @@ public class InputData {
     private BigDecimal monthsDuration = BigDecimal.valueOf(180);
     private RateType rateType = RateType.CONSTANT;
     private BigDecimal bankMarginPercent = new BigDecimal("1.9");
+
+    private Map<Integer, BigDecimal> overpaymentSchema = Map.of(
+            5, BigDecimal.valueOf(10000),
+            6, BigDecimal.valueOf(10000),
+            7, BigDecimal.valueOf(10000),
+            8, BigDecimal.valueOf(10000)
+    );
+
+    private String overpaymentReduceWay = Overpayment.REDUCE_PERIOD;
+
+    private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
+
+    private BigDecimal overpaymentProvisionMonth = BigDecimal.valueOf(36);
+
+    public InputData withOverpaymentSchema(Map<Integer, BigDecimal> overpaymentSchema){
+        this.overpaymentSchema = overpaymentSchema;
+        return this;
+    }
+
+    public InputData withOverpaymentReduceWay(String overpaymentReduceWay){
+        this.overpaymentReduceWay = overpaymentReduceWay;
+        return this;
+    }
+
+    public InputData withOverpaymentProvisionPercent(BigDecimal overpaymentProvisionPercent){
+        this.overpaymentProvisionPercent = overpaymentProvisionPercent;
+        return this;
+    }
+
+    public InputData withOverpaymentProvisionMonth(BigDecimal overpaymentProvisionMonth){
+        this.overpaymentProvisionMonth = overpaymentProvisionMonth;
+        return this;
+    }
+
+
+
+
+
     public InputData withRepaymentStartDate(LocalDate repaymentStartDate){
         this.repaymentStartDate =  repaymentStartDate;
         return this;
@@ -58,5 +97,19 @@ public class InputData {
         return wiborPercent.add(bankMarginPercent).setScale(2, RoundingMode.HALF_UP);
     }
 
+    public Map<Integer, BigDecimal> getOverpaymentSchema() {
+        return overpaymentSchema;
+    }
 
+    public String getOverpaymentReduceWay() {
+        return overpaymentReduceWay;
+    }
+
+    public BigDecimal getOverpaymentProvisionPercent() {
+        return overpaymentProvisionPercent.divide(PERCENT, 4, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getOverpaymentProvisionMonth() {
+        return overpaymentProvisionMonth;
+    }
 }

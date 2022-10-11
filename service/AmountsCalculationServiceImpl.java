@@ -1,6 +1,7 @@
 package CreditApp.service;
 
 import CreditApp.models.InputData;
+import CreditApp.models.Overpayment;
 import CreditApp.models.Rate;
 import CreditApp.models.RateAmounts;
 
@@ -11,7 +12,7 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService 
 
     public static final BigDecimal YEAR = BigDecimal.valueOf(12);
     @Override
-    public RateAmounts calculate(InputData inputData) {
+    public RateAmounts calculate(InputData inputData, Overpayment overpayment) {
         return switch (inputData.getRateType()) {
             case CONSTANT -> calculateConstantRate(inputData);
             case DECREASING -> calculateDecreasingRate(inputData);
@@ -19,7 +20,7 @@ public class AmountsCalculationServiceImpl implements AmountsCalculationService 
     }
 
     @Override
-    public RateAmounts calculate(InputData inputData, Rate previousRate) {
+    public RateAmounts calculate(InputData inputData, Overpayment overpayment, Rate previousRate) {
         return switch (inputData.getRateType()) {
             case CONSTANT -> calculateConstantRate(inputData, previousRate);
             case DECREASING -> calculateDecreasingRate(inputData, previousRate);
