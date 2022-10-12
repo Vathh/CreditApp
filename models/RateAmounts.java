@@ -35,6 +35,7 @@ public class RateAmounts {
         return capitalAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
-
-
+    public Overpayment getOverpayment() {
+        return overpayment;
+    }
 }

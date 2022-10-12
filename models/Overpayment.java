@@ -23,6 +23,6 @@ public class Overpayment {
     }
 
     public BigDecimal getProvisionAmount() {
-        return provisionAmount.setScale(2, RoundingMode.HALF_UP);;
+        return provisionAmount.setScale(2, RoundingMode.HALF_UP);
     }
 }
